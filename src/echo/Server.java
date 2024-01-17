@@ -13,6 +13,8 @@ import java.net.Socket;
 
 public class Server {
 
+	//private static String msg;
+
 	public static void main(String[] args) throws IOException {
 
 		// 서버 소켓 생성
@@ -41,20 +43,30 @@ public class Server {
 		OutputStreamWriter isw = new OutputStreamWriter(os, "UTF-8");
 		BufferedWriter bw = new BufferedWriter(isw);
 
-		// 메세지 받기
-		String msg = br.readLine();
-		System.out.println("받은메세지:" + msg);
+		////
+		while (true) {
+			// 메세지 받기
+			String msg = br.readLine();
+			if (msg == null) {
+				break;
+			}
 
-		// 메세지 보내기
-		bw.write(msg);
-		bw.newLine();
-		bw.flush();
+			System.out.println("받은메세지:" + msg);
 
-		// 닫기
-		br.close();
-		bw.close();
-		socket.close();
-		serverSocket.close();
-	}
+			// 메세지 보내기
+			bw.write(msg);
+			bw.newLine();
+			bw.flush();
+
+			System.out.println("==============================");
+			System.out.println("<서버종료>");
+
+			// 닫기
+			br.close();
+			bw.close();
+			socket.close();
+			serverSocket.close();
+		
+	}}
 
 }
